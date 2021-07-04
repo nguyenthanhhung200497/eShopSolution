@@ -14,9 +14,9 @@ namespace eShopSolution.Data.Entities
         public int? DiscountPercent { get; set; }
         public decimal? DiscountAmount { get; set; }
         public int ProductIds { get; set; }
-        public int ProducCategoryIds { get; set; }
+        public int ProductCategoryIds { get; set; }
         public Status Status { get; set; }
         public string Name { get; set; }
-
+       
     }
 }
