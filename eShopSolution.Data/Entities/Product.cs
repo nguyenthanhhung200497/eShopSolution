@@ -6,7 +6,6 @@ using System.Text;
 
 namespace eShopSolution.Data.Entities
 {
-    //[Table("Products")]
     public class Product
     {
         public int Id { get; set; }
@@ -14,7 +13,12 @@ namespace eShopSolution.Data.Entities
         public decimal OriginalPrice { get; set; }
         public int Stock { get; set; }
         public int ViewCount { get; set; }
-        //[Required]
         public string SeoAlias { get; set; }
+        public DateTime DateCreated { set; get; }
+        public bool? IsFeatured { get; set; }
+        public List <Cart> Carts { get; set; }
+        public List <OrderDetail> OrderDetails { get; set; }
+        public List <ProductTransaction> ProductTransactions { get; set; }
+        public List<ProductInCategory> ProductInCategories { get; set; }
     }
 }

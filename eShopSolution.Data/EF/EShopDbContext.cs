@@ -1,4 +1,5 @@
-﻿using eShopSolution.Data.Entities;
+﻿using eShopSolution.Data.Configurations;
+using eShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,39 @@ namespace eShopSolution.Data.EF
         {
             
         }
+
+        protected override void OnModelCreating (ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
+
+            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+
+            modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ProductTransactionConfiguration());
+
+            modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            
+            
+            //base.OnModelCreating(modelBuilder);
+        }
+
         //Entity Framework core
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -24,7 +58,7 @@ namespace eShopSolution.Data.EF
         public DbSet<ProductTransaction> ProductTransactions { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        
+        public DbSet<AppConfig> AppConfigs { get; set; }
 
 
 
