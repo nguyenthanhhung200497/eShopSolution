@@ -3,7 +3,7 @@ using eShopSolution.Data.EF;
 using eShopSolution.Data.Entities;
 using eShopSolution.Utilities.Exceptions;
 using eShopSolution.ViewModel.Catalog.Products;
-using eShopSolution.ViewModel.Commmon;
+using eShopSolution.ViewModel.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,7 +20,7 @@ namespace eShopSolution.Application.Catalog.Products
         private readonly EShopDbContext _context;
         private readonly IStorageService _storageService;
 
-        public ManageProductService(EShopDbContext context,IStorageService storageService)
+        public ManageProductService(EShopDbContext context, IStorageService storageService)
         {
             _context = context;
             _storageService = storageService;
@@ -59,7 +59,7 @@ namespace eShopSolution.Application.Catalog.Products
             };
 
             //save image
-            if(request.ThumbnailImage != null)
+            if (request.ThumbnailImage != null)
             {
                 product.ProductImages = new List<ProductImage>()
                 {
@@ -71,7 +71,6 @@ namespace eShopSolution.Application.Catalog.Products
                         ImagePath = await this.SaveFile(request.ThumbnailImage),
                         IsDefault = true,
                         SortOrder = 1
-
                     }
                 };
             }
@@ -87,16 +86,15 @@ namespace eShopSolution.Application.Catalog.Products
 
             var images = _context.ProductImages.Where(i => i.ProductId == productId);
 
-            foreach(var image in images)
+            foreach (var image in images)
             {
                 await _storageService.DeleteFileAsync(image.ImagePath);
             }
-            
+
             _context.Products.Remove(product);
 
             return await _context.SaveChangesAsync();
         }
-
 
         public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
@@ -112,7 +110,7 @@ namespace eShopSolution.Application.Catalog.Products
             {
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
             }
-            if(request.CategoryIds.Count > 0)
+            if (request.CategoryIds.Count > 0)
             {
                 query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
             }
@@ -137,7 +135,6 @@ namespace eShopSolution.Application.Catalog.Products
                     SeoTitle = x.pt.SeoTitle,
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount
-
                 }).ToListAsync();
 
             //4.Select and projection
@@ -146,7 +143,6 @@ namespace eShopSolution.Application.Catalog.Products
                 TotalRecord = totalRow,
                 Items = data
             };
-
 
             return pageResult;
         }
@@ -171,7 +167,6 @@ namespace eShopSolution.Application.Catalog.Products
                 SeoTitle = productTranslation != null ? productTranslation.SeoTitle : null,
                 Stock = product.Stock,
                 ViewCount = product.ViewCount
-
             };
             return productViewModel;
         }
@@ -199,7 +194,7 @@ namespace eShopSolution.Application.Catalog.Products
                     _context.ProductImages.Update(thunbnailImage);
                 }
             }
-                
+
             return await _context.SaveChangesAsync();
         }
 
@@ -209,7 +204,6 @@ namespace eShopSolution.Application.Catalog.Products
             if (product == null) throw new EShopException($"Cannot find a product with id {productId}");
             product.Price = newPrice;
             return await _context.SaveChangesAsync() > 0;
-
         }
 
         public async Task<bool> UpdateStock(int productId, int addQuatity)

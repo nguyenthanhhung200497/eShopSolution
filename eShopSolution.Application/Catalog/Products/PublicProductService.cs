@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using eShopSolution.ViewModel.Catalog.Products;
-using eShopSolution.ViewModel.Commmon;
-
+using eShopSolution.ViewModel.Common;
 
 namespace eShopSolution.Application.Catalog.Products
 {
     public class PublicProductService : IPublicProductService
     {
         private readonly EShopDbContext _context;
+
         public PublicProductService(EShopDbContext context)
         {
             _context = context;
@@ -20,7 +20,6 @@ namespace eShopSolution.Application.Catalog.Products
         //Phương thức GetAll thường không được dùng trong project thực tế.
         //public async Task<List<ProductViewModel>> GetAll(string languageId)
         //{
-            
         //    var query = from p in _context.Products
         //                join pt in _context.ProductTranslations on p.Id equals pt.ProductId
         //                join pic in _context.ProductInCategories on p.Id equals pic.ProductId
@@ -60,7 +59,7 @@ namespace eShopSolution.Application.Catalog.Products
                         select new { p, pt, pic };
 
             //2.Filter
-            if (request.CategoryId.HasValue && request.CategoryId.Value >0)
+            if (request.CategoryId.HasValue && request.CategoryId.Value > 0)
             {
                 query = query.Where(p => p.pic.CategoryId == request.CategoryId);
             }
@@ -85,7 +84,6 @@ namespace eShopSolution.Application.Catalog.Products
                     SeoTitle = x.pt.SeoTitle,
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount
-
                 }).ToListAsync();
 
             //4.Select and projection
@@ -97,6 +95,5 @@ namespace eShopSolution.Application.Catalog.Products
 
             return pageResult;
         }
-
     }
 }
