@@ -43,7 +43,7 @@ namespace eShopSolution.Application.Catalog.Products
                 Stock = request.Stock,
                 ViewCount = 0,
                 DateCreated = DateTime.Now,
-                ProductTransactions = new List<ProductTranslation>()
+                ProductTranslations = new List<ProductTranslation>()
                 {
                     new ProductTranslation()
                     {

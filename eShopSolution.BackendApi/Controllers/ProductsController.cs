@@ -1,6 +1,7 @@
 ﻿using eShopSolution.Application;
 using eShopSolution.Application.Catalog.Products;
 using eShopSolution.ViewModel.Catalog.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace eShopSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IPublicProductService _publicProductService;
@@ -173,7 +175,7 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(image);
         }
 
-        [HttpGet("{imageId}")]
+        [HttpGet("images/{imageId}")]
         public async Task<IActionResult> GetListImage(int imageId)
         {
             var images = await _manageProductService.GetListImage(imageId);
