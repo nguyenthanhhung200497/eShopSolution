@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.Application
 {
-    public interface IManageProductService
+    public interface IProductService
     {
         Task<int> Create(ProductCreateRequest request);
 
@@ -33,5 +33,7 @@ namespace eShopSolution.Application
         Task<List<ProductImageViewModel>> GetListImage(int productId);
 
         Task<ProductImageViewModel> GetImageById(int imageId);
+
+        Task<PagedResult<ProductViewModel>> GetAllByCatagoryId(string languageId, GetPublicProductPagingRequest request);
     }
 }
