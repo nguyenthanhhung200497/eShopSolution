@@ -1,10 +1,6 @@
-﻿using eShopSolution.ViewModel.System.Users;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentValidation;
 
-namespace eShopSolution.Application.System.Users
+namespace eShopSolution.ViewModel.System.Users
 {
     public class LoginRequestValidator : AbstractValidator<LoginRequest>
     {

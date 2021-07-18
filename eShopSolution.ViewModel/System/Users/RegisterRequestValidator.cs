@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShopSolution.Application.System.Users
+namespace eShopSolution.ViewModel.System.Users
 {
     public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {
